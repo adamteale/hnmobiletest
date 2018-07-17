@@ -7,14 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66AE6B7A20FEA6A800323806 /* API_object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66AE6B7920FEA6A800323806 /* API_object.swift */; };
 		66E7F87520FE8EB500873316 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7F87420FE8EB500873316 /* AppDelegate.swift */; };
 		66E7F87720FE8EB500873316 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7F87620FE8EB500873316 /* ViewController.swift */; };
 		66E7F87A20FE8EB500873316 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66E7F87820FE8EB500873316 /* Main.storyboard */; };
 		66E7F87C20FE8EB500873316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66E7F87B20FE8EB500873316 /* Assets.xcassets */; };
 		66E7F87F20FE8EB500873316 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66E7F87D20FE8EB500873316 /* LaunchScreen.storyboard */; };
+		66E7F88820FE91B900873316 /* API_request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7F88720FE91B900873316 /* API_request.swift */; };
+		66E7F88C20FE960100873316 /* Hit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7F88B20FE960100873316 /* Hit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		66AE6B7920FEA6A800323806 /* API_object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_object.swift; sourceTree = "<group>"; };
 		66E7F87120FE8EB500873316 /* hnmobiletest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hnmobiletest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66E7F87420FE8EB500873316 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66E7F87620FE8EB500873316 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +26,8 @@
 		66E7F87B20FE8EB500873316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66E7F87E20FE8EB500873316 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66E7F88020FE8EB500873316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66E7F88720FE91B900873316 /* API_request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_request.swift; sourceTree = "<group>"; };
+		66E7F88B20FE960100873316 /* Hit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 				66E7F87B20FE8EB500873316 /* Assets.xcassets */,
 				66E7F87D20FE8EB500873316 /* LaunchScreen.storyboard */,
 				66E7F88020FE8EB500873316 /* Info.plist */,
+				66E7F88720FE91B900873316 /* API_request.swift */,
+				66E7F88B20FE960100873316 /* Hit.swift */,
+				66AE6B7920FEA6A800323806 /* API_object.swift */,
 			);
 			path = hnmobiletest;
 			sourceTree = "<group>";
@@ -136,6 +145,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66AE6B7A20FEA6A800323806 /* API_object.swift in Sources */,
+				66E7F88C20FE960100873316 /* Hit.swift in Sources */,
+				66E7F88820FE91B900873316 /* API_request.swift in Sources */,
 				66E7F87720FE8EB500873316 /* ViewController.swift in Sources */,
 				66E7F87520FE8EB500873316 /* AppDelegate.swift in Sources */,
 			);
