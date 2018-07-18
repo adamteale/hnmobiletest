@@ -70,9 +70,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vB9-0N-Hcc">
-                                <rect key="frame" x="38" y="77" width="298" height="511"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vB9-0N-Hcc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -81,6 +80,12 @@
                             </wkWebView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vB9-0N-Hcc" firstAttribute="leading" secondItem="u7U-wZ-4SC" secondAttribute="leading" id="ETC-Bq-ORd"/>
+                            <constraint firstItem="vB9-0N-Hcc" firstAttribute="top" secondItem="u7U-wZ-4SC" secondAttribute="top" id="O49-u1-sVW"/>
+                            <constraint firstItem="u7U-wZ-4SC" firstAttribute="bottom" secondItem="vB9-0N-Hcc" secondAttribute="bottom" id="VWy-36-z0o"/>
+                            <constraint firstItem="u7U-wZ-4SC" firstAttribute="trailing" secondItem="vB9-0N-Hcc" secondAttribute="trailing" id="wLG-gm-gkd"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="u7U-wZ-4SC"/>
                     </view>
                     <connections>

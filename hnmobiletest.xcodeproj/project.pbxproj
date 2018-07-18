@@ -16,6 +16,7 @@
 		CA2A640220FED8A5005EAF37 /* Post_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A640120FED8A5005EAF37 /* Post_TableViewCell.swift */; };
 		CA2A640520FEE0E2005EAF37 /* WebView_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A640420FEE0E2005EAF37 /* WebView_ViewController.swift */; };
 		CA2A640720FEEBBA005EAF37 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A640620FEEBBA005EAF37 /* Reachability.swift */; };
+		CA2A640920FF43CC005EAF37 /* Hit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A640820FF43CC005EAF37 /* Hit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		CA2A640120FED8A5005EAF37 /* Post_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post_TableViewCell.swift; sourceTree = "<group>"; };
 		CA2A640420FEE0E2005EAF37 /* WebView_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView_ViewController.swift; sourceTree = "<group>"; };
 		CA2A640620FEEBBA005EAF37 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		CA2A640820FF43CC005EAF37 /* Hit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +64,12 @@
 		66E7F87320FE8EB500873316 /* hnmobiletest */ = {
 			isa = PBXGroup;
 			children = (
-				CA2A640320FED8B2005EAF37 /* Classes */,
-				66E7F87420FE8EB500873316 /* AppDelegate.swift */,
 				CA2A63FF20FECFFA005EAF37 /* API_structs.swift */,
+				CA2A640820FF43CC005EAF37 /* Hit.swift */,
+				CA2A640120FED8A5005EAF37 /* Post_TableViewCell.swift */,
+				CA2A640420FEE0E2005EAF37 /* WebView_ViewController.swift */,
+				CA2A640620FEEBBA005EAF37 /* Reachability.swift */,
+				66E7F87420FE8EB500873316 /* AppDelegate.swift */,
 				66E7F87620FE8EB500873316 /* ViewController.swift */,
 				66E7F87D20FE8EB500873316 /* LaunchScreen.storyboard */,
 				66E7F87820FE8EB500873316 /* Main.storyboard */,
@@ -72,16 +77,6 @@
 				66E7F87B20FE8EB500873316 /* Assets.xcassets */,
 			);
 			path = hnmobiletest;
-			sourceTree = "<group>";
-		};
-		CA2A640320FED8B2005EAF37 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				CA2A640120FED8A5005EAF37 /* Post_TableViewCell.swift */,
-				CA2A640420FEE0E2005EAF37 /* WebView_ViewController.swift */,
-				CA2A640620FEEBBA005EAF37 /* Reachability.swift */,
-			);
-			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA2A640920FF43CC005EAF37 /* Hit.swift in Sources */,
 				66E7F87720FE8EB500873316 /* ViewController.swift in Sources */,
 				CA2A640020FECFFA005EAF37 /* API_structs.swift in Sources */,
 				CA2A640720FEEBBA005EAF37 /* Reachability.swift in Sources */,
