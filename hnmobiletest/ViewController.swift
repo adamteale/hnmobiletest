@@ -5,125 +5,119 @@ hnmobiletest
 Created by adam on 7/17/18.
 Copyright © 2018 adam. All rights reserved.
 
-- test for connection - load previous if exists or GET from API
-- retrieve json data & decode
-- write data to user defaults
-- refresh tableview from saved data
-- format date
-- sort posts by date
-- push to web view
-- swipe to delete
-
  */
 
 import UIKit
 
-
 class ViewController: UITableViewController {
-
   let appDelegate = UIApplication.shared.delegate as! AppDelegate
   var api_object : API_object?
   var deleted_items : [Hit]?
+  var hitDateFormatter : DateFormatter?
   
   @IBOutlet var posts_tableView: UITableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    let refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: #selector(fetchPostData), for: .valueChanged)
+    refreshControl.tintColor = UIColor.darkGray
+
+    self.refreshControl = refreshControl
     tableView.dataSource = self
     tableView.delegate = self
-
-    let refreshControl = UIRefreshControl()
-    refreshControl.addTarget(self, action: #selector(refreshPostsData), for: .valueChanged)
-    refreshControl.tintColor = UIColor.darkGray
-    tableView.refreshControl = refreshControl
     
     // restore array of deleted items for later filtering
     self.loadDeletedItems()
-    // Get posts from API or from local JSON
-    self.fetchPostData()
 
+    // Get posts from from local JSON
+    self.loadLocalData()
   }
+  
+  
 
+  override func viewDidAppear(_ animated: Bool) {
+    if Reachability.isConnectedToNetwork(){
+      
+      self.fetchPostData()
+    }else{
+      let alert = UIAlertController(title: "Network connection is not available.", message: "Make sure your device has an active connection.", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+      self.present(alert, animated: true)
+    }
+  }
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
+  
+  func setupDateFormatter(){
+    self.hitDateFormatter = DateFormatter()
+    self.hitDateFormatter?.dateStyle = .long
+    self.hitDateFormatter?.timeStyle = .short
+    self.hitDateFormatter?.doesRelativeDateFormatting = true
+  }
 
-  func fetchPostData()
+  @objc private func fetchPostData()
   {
     
-    // Test for connection and collect json if available
+    // Test for connection and get JSON if available otherwise read from previously saved data
     if Reachability.isConnectedToNetwork(){
-
       let api_urlstring = "http://hn.algolia.com/api/v1/search_by_date?query=ios"
-
-      guard let url = URL(string: api_urlstring) else
-      { return }
-      
+      guard let url = URL(string: api_urlstring) else{
+        return
+      }
       let urltask = URLSession.shared.dataTask(with: url, completionHandler:{(data: Data?, response: URLResponse?, error: Error?) in
-        
         if error != nil {
           print(error!.localizedDescription)
         }
-        
-        guard let data = data else { return }
-        
+        guard let data = data else {
+          return
+        }
         //save JSON data locally for offline use
         do {
           try data.write(to: self.getLocalJSONFileURL(), options: [])
         } catch {
           print(error)
         }
-
         self.retrieveNewPostsFinishedCompletionHandler()
-        
       })
-      
       urltask.resume()
-
-    }else{
-      print("Internet Connection not Available!")
     }
+    else{
+      print("No network")
 
-    do {
-      let data = try Data(contentsOf: getLocalJSONFileURL(), options: .mappedIfSafe)
-      let api_object_struct = try JSONDecoder().decode(API_object.self, from: data)
-      
-      //Trim if previously deleted
-      let filteredHitsArray = Array(Set<Hit>(api_object_struct.hits!).subtracting(self.deleted_items!))
-      let sortedfilteredHitsArray = filteredHitsArray.sorted(by: { $0.created_at! > $1.created_at! })
-      
-      self.api_object = api_object_struct
-      self.api_object?.hits = sortedfilteredHitsArray
-    }
-    catch {
-      // handle error
-      print("Error reading local json file")
+
+
+      let alert = UIAlertController(title: "Network connection is not available.",
+                                    message: "Make sure your device has an active connection.",
+                                    preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+//      DispatchQueue.main.async {
+//        self.present(alert, animated: true)
+//      }
+      present(alert, animated: true) {
+        self.refreshControl?.endRefreshing()
+        self.tableView.reloadData()
+      }
     }
     
+
   }
-  
-  
-  @objc private func refreshPostsData(_ sender: Any) {
-    fetchPostData()
-  }
- 
   
   func retrieveNewPostsFinishedCompletionHandler()
   {
+    loadLocalData()
     DispatchQueue.main.async {
-      self.tableView.refreshControl?.endRefreshing()
+      self.refreshControl?.endRefreshing()
       self.tableView.reloadData()
-    }
-    
+    }    
   }
 
-  
   func getLocalJSONFileURL() -> URL {
-    
     let documentDirectoryUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-    let fileUrl = documentDirectoryUrl?.appendingPathComponent("api_post_data.json")
-    
+    let fileUrl = documentDirectoryUrl?.appendingPathComponent("api_post_data_v2.json")
     return fileUrl!
   }
   
@@ -139,26 +133,35 @@ class ViewController: UITableViewController {
     }else{
       self.deleted_items = []
     }
-    
   }
 
+  func loadLocalData(){
+    do {
+      let data = try Data(contentsOf: getLocalJSONFileURL(), options: .mappedIfSafe)
+      let api_object_struct = try JSONDecoder().decode(API_object.self, from: data)
+      //Trim if previously deleted
+      let filteredHitsArray = Array(Set<Hit>(api_object_struct.hits!).subtracting(self.deleted_items!))
+      let sortedfilteredHitsArray = filteredHitsArray.sorted(by: { $0.createdAt! > $1.createdAt! })
+      self.api_object = api_object_struct
+      self.api_object?.hits = sortedfilteredHitsArray
+    }
+    catch {
+      // handle error
+      print("Error reading local json file")
+    }
+  }
+  
   // MARK: - Nav / Segue Methods
-
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if  segue.identifier == "showWebView",
-      let destination = segue.destination as? WebView_ViewController,
-      let post_index = tableView.indexPathForSelectedRow?.row
-    {
-      if (self.api_object?.hits?[post_index].story_url) != nil{
-        destination.post_url = self.api_object?.hits?[post_index].story_url
-        print(destination.post_url)
+    if segue.identifier == "showWebView", let destination = segue.destination as? WebView_ViewController, let post_index = tableView.indexPathForSelectedRow?.row{
+      let story = self.api_object?.hits?[post_index]
+      if (story?.storyURL) != nil{
+        destination.post_url = self.api_object?.hits?[post_index].storyURL
       }
     }
   }
   
-
   // MARK: - TableView Methods
-  
   override func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
@@ -171,46 +174,30 @@ class ViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
     let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! Post_TableViewCell
     var author_and_date = ""
-
     let row = indexPath.row
+    let hit = self.api_object?.hits![row]
 
-    if (self.api_object?.hits![row].story_title) != nil
-    {
-      cell.title_label.text = self.api_object?.hits![row].story_title
+    if (hit?.storyTitle) != nil{
+      cell.title_label.text = hit?.storyTitle
     }
-    else
-    {
+    else{
       cell.title_label.text = ""
     }
 
-    if (self.api_object?.hits![row].author) != nil
-    {
-      author_and_date = (self.api_object?.hits![row].author)!
+    if (hit?.author) != nil{
+      author_and_date = (hit?.author)!
     }
 
-    if (self.api_object?.hits![row].created_at) != nil
-    {
-      let dateFormatterGet = DateFormatter()
-      dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-
-      let date: Date? = dateFormatterGet.date(from: (self.api_object?.hits![row].created_at)!)
-      
-      let dateFormatter = DateFormatter()
-      dateFormatter.dateStyle = .long
-      dateFormatter.timeStyle = .short
-      dateFormatter.doesRelativeDateFormatting = true
-      
-      let dateitemstring = dateFormatter.string(from: date!)
-      
-      author_and_date = author_and_date + " - "  + dateitemstring
-
+    if (hit?.createdAt) != nil{
+      let date: Date? = self.hitDateFormatter?.date(from: (hit?.createdAt)!)
+      if let dateitemstring = self.hitDateFormatter?.string(from: date!){
+        author_and_date = author_and_date + " - "  + dateitemstring
+      }
     }
     
     cell.authorAndTime_label.text = author_and_date
-
     return cell
   }
   
@@ -226,14 +213,13 @@ class ViewController: UITableViewController {
     if (editingStyle == UITableViewCellEditingStyle.delete) {
       
       let row = indexPath.row
-      
+      let hit = self.api_object?.hits![row]
+
       //Add to deleted items array
-      self.deleted_items?.append((self.api_object?.hits![row])!)
+      self.deleted_items?.append((hit)!)
       self.api_object?.hits!.remove(at: row)
       self.saveDeletedItems()
       self.tableView.reloadData()
     }
   }
-
 }
-

@@ -9,41 +9,55 @@
 import Foundation
 
 struct Hit : Codable{
-  
-  var created_at : String?
-  var title : String?
-  var url : URL?
-  var author : String?
-  var points : String?
-  var story_text : String?
-  var comment_text : String?
-  var num_comments : Int?
-  var story_id : Int?
-  var story_title : String?
-  var story_url : URL?
-  var parent_id : Int?
-  var created_at_i : Int?
-  var _tags : [String]?
-  var objectID : String?
-  var _highlightResult : HighLightedResult?
-  
-  
+  enum CodingKeys: String, CodingKey {
+    case createdAt = "created_at"
+    case title
+    case url
+    case author
+    case points
+    case storyText = "story_text"
+    case commentText = "commentText"
+    case numComments = "num_comments"
+    case storyID = "story_id"
+    case storyTitle = "story_title"
+    case storyURL = "story_url"
+    case parentID = "parent_id"
+    case createdAtI = "created_at_i"
+    case tags = "_tags"
+    case objectID
+    case highlightResult = "_highlightResult"
+  }
+
+  let createdAt : String?
+  let title : String?
+  let url : URL?
+  let author : String?
+  let points : String?
+  let storyText : String?
+  let commentText : String?
+  let numComments : Int?
+  let storyID : Int?
+  let storyTitle : String?
+  let storyURL : URL?
+  let parentID : Int?
+  let createdAtI : Int?
+  let tags : [String]?
+  let objectID : String?
+  let highlightResult : HighLightedResult?
 }
 
-
 extension Hit: Hashable, Equatable {
-  var hashValue:Int { return "\(String(describing: self.story_id)),\(String(describing: self.story_id))".hashValue }
+  var hashValue:Int { return "\(String(describing: self.storyID)),\(String(describing: self.storyID))".hashValue }
 }
 
 func ==(lhs: Hit, rhs: Hit) -> Bool {
-  return lhs.story_id == rhs.story_id
+  return lhs.storyID == rhs.storyID
 }
 
 func >(lhs: Hit, rhs: Hit) -> Bool {
   let dateFormatterGet = DateFormatter()
   dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
-  let dateA: Date? = dateFormatterGet.date(from: lhs.created_at! )
-  let dateB: Date? = dateFormatterGet.date(from: rhs.created_at! )
-
+  let dateA: Date? = dateFormatterGet.date(from: lhs.createdAt! )
+  let dateB: Date? = dateFormatterGet.date(from: rhs.createdAt! )
   return dateA! > dateB!
 }
