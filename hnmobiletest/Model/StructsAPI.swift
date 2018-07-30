@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct API_object: Decodable {
+struct APIObject: Decodable {
   
   var hits : [Hit]?
   var nbHits : Int?
@@ -22,16 +22,19 @@ struct API_object: Decodable {
   
 }
 
-
-
-
-
 struct HighLightedResult : Codable
 {
+  enum CodingKeys: String, CodingKey {
+    case author
+    case commentText = "comment_text"
+    case storyTitle = "story_title"
+    case storyURL = "story_url"
+  }
+  
   let author : Author?
-  let comment_text : Comment_Text?
-  let story_title : Story_Title?
-  let story_url : Story_URL?
+  let commentText : Comment_Text?
+  let storyTitle : StoryTitle?
+  let storyURL : StoryURL?
 }
 
 struct Author : Codable
@@ -49,7 +52,7 @@ struct Comment_Text : Codable
   let matchedWords : [String]?
 }
 
-struct Story_Title : Codable
+struct StoryTitle : Codable
 {
   let value : String?
   let matchLevel : String?
@@ -58,7 +61,7 @@ struct Story_Title : Codable
   
 }
 
-struct Story_URL : Codable
+struct StoryURL : Codable
 {
   let value : String?
   let matchLevel : String?

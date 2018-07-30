@@ -1,0 +1,16 @@
+PODS:
+  - KAWebBrowser (0.3.0)
+
+DEPENDENCIES:
+  - KAWebBrowser
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - KAWebBrowser
+
+SPEC CHECKSUMS:
+  KAWebBrowser: b20c6aa2c94ce8341abdacc02987741ccb443b3d
+
+PODFILE CHECKSUM: 5ca8ab4fe133dd6cabb9896c71f5427388097540
+
+COCOAPODS: 1.5.3

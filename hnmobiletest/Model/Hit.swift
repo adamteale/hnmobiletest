@@ -32,7 +32,7 @@ struct Hit : Codable{
   let title : String?
   let url : URL?
   let author : String?
-  let points : String?
+  let points : Int?
   let storyText : String?
   let commentText : String?
   let numComments : Int?

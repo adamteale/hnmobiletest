@@ -10,28 +10,30 @@
 		66E7F87520FE8EB500873316 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7F87420FE8EB500873316 /* AppDelegate.swift */; };
 		66E7F87720FE8EB500873316 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E7F87620FE8EB500873316 /* ViewController.swift */; };
 		66E7F87A20FE8EB500873316 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66E7F87820FE8EB500873316 /* Main.storyboard */; };
-		66E7F87C20FE8EB500873316 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66E7F87B20FE8EB500873316 /* Assets.xcassets */; };
 		66E7F87F20FE8EB500873316 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66E7F87D20FE8EB500873316 /* LaunchScreen.storyboard */; };
-		CA2A640020FECFFA005EAF37 /* API_structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A63FF20FECFFA005EAF37 /* API_structs.swift */; };
-		CA2A640220FED8A5005EAF37 /* Post_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A640120FED8A5005EAF37 /* Post_TableViewCell.swift */; };
-		CA2A640520FEE0E2005EAF37 /* WebView_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A640420FEE0E2005EAF37 /* WebView_ViewController.swift */; };
+		CA2A640020FECFFA005EAF37 /* StructsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A63FF20FECFFA005EAF37 /* StructsAPI.swift */; };
+		CA2A640220FED8A5005EAF37 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A640120FED8A5005EAF37 /* PostTableViewCell.swift */; };
 		CA2A640720FEEBBA005EAF37 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A640620FEEBBA005EAF37 /* Reachability.swift */; };
 		CA2A640920FF43CC005EAF37 /* Hit.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA2A640820FF43CC005EAF37 /* Hit.swift */; };
+		CA4882F4210E6E41003BE779 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA4882F3210E6E41003BE779 /* Assets.xcassets */; };
+		F7E142706424159BC059CA66 /* Pods_hnmobiletest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1C0EC514C06E104C503FEF9 /* Pods_hnmobiletest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04488706EC4E831634FDE494 /* Pods-hnmobiletest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hnmobiletest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-hnmobiletest/Pods-hnmobiletest.debug.xcconfig"; sourceTree = "<group>"; };
 		66E7F87120FE8EB500873316 /* hnmobiletest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hnmobiletest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66E7F87420FE8EB500873316 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66E7F87620FE8EB500873316 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		66E7F87920FE8EB500873316 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		66E7F87B20FE8EB500873316 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66E7F87E20FE8EB500873316 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66E7F88020FE8EB500873316 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CA2A63FF20FECFFA005EAF37 /* API_structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API_structs.swift; sourceTree = "<group>"; };
-		CA2A640120FED8A5005EAF37 /* Post_TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post_TableViewCell.swift; sourceTree = "<group>"; };
-		CA2A640420FEE0E2005EAF37 /* WebView_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView_ViewController.swift; sourceTree = "<group>"; };
+		B1C0EC514C06E104C503FEF9 /* Pods_hnmobiletest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hnmobiletest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA2A63FF20FECFFA005EAF37 /* StructsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StructsAPI.swift; sourceTree = "<group>"; };
+		CA2A640120FED8A5005EAF37 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		CA2A640620FEEBBA005EAF37 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		CA2A640820FF43CC005EAF37 /* Hit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hit.swift; sourceTree = "<group>"; };
+		CA4882F3210E6E41003BE779 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CDEFD43805F4A135778578FA /* Pods-hnmobiletest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hnmobiletest.release.xcconfig"; path = "Pods/Target Support Files/Pods-hnmobiletest/Pods-hnmobiletest.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7E142706424159BC059CA66 /* Pods_hnmobiletest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +53,8 @@
 			children = (
 				66E7F87320FE8EB500873316 /* hnmobiletest */,
 				66E7F87220FE8EB500873316 /* Products */,
+				C98CB0E9157736509ABF121F /* Pods */,
+				6C398B2F04719F03A69852DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,19 +69,59 @@
 		66E7F87320FE8EB500873316 /* hnmobiletest */ = {
 			isa = PBXGroup;
 			children = (
-				CA2A63FF20FECFFA005EAF37 /* API_structs.swift */,
-				CA2A640820FF43CC005EAF37 /* Hit.swift */,
-				CA2A640120FED8A5005EAF37 /* Post_TableViewCell.swift */,
-				CA2A640420FEE0E2005EAF37 /* WebView_ViewController.swift */,
-				CA2A640620FEEBBA005EAF37 /* Reachability.swift */,
 				66E7F87420FE8EB500873316 /* AppDelegate.swift */,
-				66E7F87620FE8EB500873316 /* ViewController.swift */,
+				CA9DB1BA210E7278006F3323 /* Helpers */,
+				CA9DB1B8210E7256006F3323 /* Model */,
+				CA9DB1B9210E7266006F3323 /* View */,
 				66E7F87D20FE8EB500873316 /* LaunchScreen.storyboard */,
 				66E7F87820FE8EB500873316 /* Main.storyboard */,
+				CA4882F3210E6E41003BE779 /* Assets.xcassets */,
 				66E7F88020FE8EB500873316 /* Info.plist */,
-				66E7F87B20FE8EB500873316 /* Assets.xcassets */,
 			);
 			path = hnmobiletest;
+			sourceTree = "<group>";
+		};
+		6C398B2F04719F03A69852DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B1C0EC514C06E104C503FEF9 /* Pods_hnmobiletest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C98CB0E9157736509ABF121F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				04488706EC4E831634FDE494 /* Pods-hnmobiletest.debug.xcconfig */,
+				CDEFD43805F4A135778578FA /* Pods-hnmobiletest.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CA9DB1B8210E7256006F3323 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CA2A63FF20FECFFA005EAF37 /* StructsAPI.swift */,
+				CA2A640820FF43CC005EAF37 /* Hit.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		CA9DB1B9210E7266006F3323 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CA2A640120FED8A5005EAF37 /* PostTableViewCell.swift */,
+				66E7F87620FE8EB500873316 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		CA9DB1BA210E7278006F3323 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				CA2A640620FEEBBA005EAF37 /* Reachability.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,9 +131,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 66E7F88320FE8EB500873316 /* Build configuration list for PBXNativeTarget "hnmobiletest" */;
 			buildPhases = (
+				F134EAD6A125041072D6E93F /* [CP] Check Pods Manifest.lock */,
 				66E7F86D20FE8EB500873316 /* Sources */,
 				66E7F86E20FE8EB500873316 /* Frameworks */,
 				66E7F86F20FE8EB500873316 /* Resources */,
+				2A64C76EA90C09A7970A7A6D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -139,12 +186,51 @@
 			buildActionMask = 2147483647;
 			files = (
 				66E7F87F20FE8EB500873316 /* LaunchScreen.storyboard in Resources */,
-				66E7F87C20FE8EB500873316 /* Assets.xcassets in Resources */,
+				CA4882F4210E6E41003BE779 /* Assets.xcassets in Resources */,
 				66E7F87A20FE8EB500873316 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2A64C76EA90C09A7970A7A6D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-hnmobiletest/Pods-hnmobiletest-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/KAWebBrowser/KAWebBrowser.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KAWebBrowser.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-hnmobiletest/Pods-hnmobiletest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F134EAD6A125041072D6E93F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-hnmobiletest-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		66E7F86D20FE8EB500873316 /* Sources */ = {
@@ -153,11 +239,10 @@
 			files = (
 				CA2A640920FF43CC005EAF37 /* Hit.swift in Sources */,
 				66E7F87720FE8EB500873316 /* ViewController.swift in Sources */,
-				CA2A640020FECFFA005EAF37 /* API_structs.swift in Sources */,
+				CA2A640020FECFFA005EAF37 /* StructsAPI.swift in Sources */,
 				CA2A640720FEEBBA005EAF37 /* Reachability.swift in Sources */,
 				66E7F87520FE8EB500873316 /* AppDelegate.swift in Sources */,
-				CA2A640520FEE0E2005EAF37 /* WebView_ViewController.swift in Sources */,
-				CA2A640220FED8A5005EAF37 /* Post_TableViewCell.swift in Sources */,
+				CA2A640220FED8A5005EAF37 /* PostTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,8 +381,10 @@
 		};
 		66E7F88420FE8EB500873316 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 04488706EC4E831634FDE494 /* Pods-hnmobiletest.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K26FPJ2QVZ;
 				INFOPLIST_FILE = hnmobiletest/Info.plist;
@@ -311,8 +398,10 @@
 		};
 		66E7F88520FE8EB500873316 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CDEFD43805F4A135778578FA /* Pods-hnmobiletest.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = K26FPJ2QVZ;
 				INFOPLIST_FILE = hnmobiletest/Info.plist;

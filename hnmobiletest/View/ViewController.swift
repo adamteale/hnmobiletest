@@ -8,14 +8,17 @@ Copyright © 2018 adam. All rights reserved.
  */
 
 import UIKit
+import KAWebBrowser
 
 class ViewController: UITableViewController {
+
   let appDelegate = UIApplication.shared.delegate as! AppDelegate
-  var api_object : API_object?
-  var deleted_items : [Hit]?
+  var apiObject : APIObject?
+  var previouslyDeletedItems : [Hit]?
   var hitDateFormatter : DateFormatter?
+  var dateFormatterGet : DateFormatter?
   
-  @IBOutlet var posts_tableView: UITableView!
+  @IBOutlet var postsTableView: UITableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -28,21 +31,24 @@ class ViewController: UITableViewController {
     tableView.dataSource = self
     tableView.delegate = self
     
+    //Setup date formatters
+    self.setupDateFormatters()
+    
     // restore array of deleted items for later filtering
     self.loadDeletedItems()
 
     // Get posts from from local JSON
     self.loadLocalData()
   }
-  
-  
 
   override func viewDidAppear(_ animated: Bool) {
+    // Check if network connection exists
     if Reachability.isConnectedToNetwork(){
-      
       self.fetchPostData()
     }else{
-      let alert = UIAlertController(title: "Network connection is not available.", message: "Make sure your device has an active connection.", preferredStyle: .alert)
+      let alert = UIAlertController(title: "Network connection is not available.",
+                                    message: "Make sure your device has an active connection.",
+                                    preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
       self.present(alert, animated: true)
     }
@@ -52,7 +58,10 @@ class ViewController: UITableViewController {
     super.didReceiveMemoryWarning()
   }
   
-  func setupDateFormatter(){
+  func setupDateFormatters(){
+    self.dateFormatterGet = DateFormatter()
+    self.dateFormatterGet?.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXXXX"
+
     self.hitDateFormatter = DateFormatter()
     self.hitDateFormatter?.dateStyle = .long
     self.hitDateFormatter?.timeStyle = .short
@@ -61,11 +70,12 @@ class ViewController: UITableViewController {
 
   @objc private func fetchPostData()
   {
-    
+    UIApplication.shared.isNetworkActivityIndicatorVisible = true
     // Test for connection and get JSON if available otherwise read from previously saved data
     if Reachability.isConnectedToNetwork(){
-      let api_urlstring = "http://hn.algolia.com/api/v1/search_by_date?query=ios"
-      guard let url = URL(string: api_urlstring) else{
+      
+      let endPointAPIURL = "http://hn.algolia.com/api/v1/search_by_date?query=ios"
+      guard let url = URL(string: endPointAPIURL) else{
         return
       }
       let urltask = URLSession.shared.dataTask(with: url, completionHandler:{(data: Data?, response: URLResponse?, error: Error?) in
@@ -86,24 +96,17 @@ class ViewController: UITableViewController {
       urltask.resume()
     }
     else{
-      print("No network")
-
-
-
       let alert = UIAlertController(title: "Network connection is not available.",
                                     message: "Make sure your device has an active connection.",
                                     preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-//      DispatchQueue.main.async {
-//        self.present(alert, animated: true)
-//      }
       present(alert, animated: true) {
         self.refreshControl?.endRefreshing()
         self.tableView.reloadData()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
       }
     }
     
-
   }
   
   func retrieveNewPostsFinishedCompletionHandler()
@@ -112,7 +115,8 @@ class ViewController: UITableViewController {
     DispatchQueue.main.async {
       self.refreshControl?.endRefreshing()
       self.tableView.reloadData()
-    }    
+      UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
   }
 
   func getLocalJSONFileURL() -> URL {
@@ -123,41 +127,30 @@ class ViewController: UITableViewController {
   
   func saveDeletedItems()
   {
-    UserDefaults.standard.set(try? PropertyListEncoder().encode(self.deleted_items), forKey:"deleted_items")
+    UserDefaults.standard.set(try? PropertyListEncoder().encode(self.previouslyDeletedItems), forKey:"deleted_items")
   }
 
   func loadDeletedItems()
   {
     if let data = UserDefaults.standard.value(forKey:"deleted_items") as? Data {
-      self.deleted_items = try? PropertyListDecoder().decode(Array<Hit>.self, from: data)
+      self.previouslyDeletedItems = try? PropertyListDecoder().decode(Array<Hit>.self, from: data)
     }else{
-      self.deleted_items = []
+      self.previouslyDeletedItems = []
     }
   }
 
   func loadLocalData(){
     do {
       let data = try Data(contentsOf: getLocalJSONFileURL(), options: .mappedIfSafe)
-      let api_object_struct = try JSONDecoder().decode(API_object.self, from: data)
+      let apiObjectStruct = try JSONDecoder().decode(APIObject.self, from: data)
       //Trim if previously deleted
-      let filteredHitsArray = Array(Set<Hit>(api_object_struct.hits!).subtracting(self.deleted_items!))
+      let filteredHitsArray = Array(Set<Hit>(apiObjectStruct.hits!).subtracting(self.previouslyDeletedItems!))
       let sortedfilteredHitsArray = filteredHitsArray.sorted(by: { $0.createdAt! > $1.createdAt! })
-      self.api_object = api_object_struct
-      self.api_object?.hits = sortedfilteredHitsArray
+      self.apiObject = apiObjectStruct
+      self.apiObject?.hits = sortedfilteredHitsArray
     }
     catch {
-      // handle error
-      print("Error reading local json file")
-    }
-  }
-  
-  // MARK: - Nav / Segue Methods
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "showWebView", let destination = segue.destination as? WebView_ViewController, let post_index = tableView.indexPathForSelectedRow?.row{
-      let story = self.api_object?.hits?[post_index]
-      if (story?.storyURL) != nil{
-        destination.post_url = self.api_object?.hits?[post_index].storyURL
-      }
+      print("Error reading local json file: \(error)")
     }
   }
   
@@ -167,41 +160,56 @@ class ViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    guard let itemcount = self.api_object?.hits?.count else {
+    guard let itemcount = self.apiObject?.hits?.count else {
       return 0
     }
     return itemcount
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! Post_TableViewCell
-    var author_and_date = ""
+    let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! PostTableViewCell
+    var authorWithDate = ""
     let row = indexPath.row
-    let hit = self.api_object?.hits![row]
+    let hit = self.apiObject?.hits![row]
 
     if (hit?.storyTitle) != nil{
-      cell.title_label.text = hit?.storyTitle
+      cell.titleLabel.text = hit?.storyTitle
     }
-    else{
-      cell.title_label.text = ""
+    else if (hit?.title) != nil{
+      cell.titleLabel.text = hit?.title
+    }    else{
+      cell.titleLabel.text = ""
     }
 
     if (hit?.author) != nil{
-      author_and_date = (hit?.author)!
+      authorWithDate = (hit?.author)!
     }
 
     if (hit?.createdAt) != nil{
-      let date: Date? = self.hitDateFormatter?.date(from: (hit?.createdAt)!)
-      if let dateitemstring = self.hitDateFormatter?.string(from: date!){
-        author_and_date = author_and_date + " - "  + dateitemstring
+      let createdAtDateFormatted: Date? = self.dateFormatterGet?.date(from: (hit?.createdAt)!)
+      if let dateitemstring = self.hitDateFormatter?.string(from: createdAtDateFormatted!){
+        authorWithDate = authorWithDate + " - "  + dateitemstring
       }
     }
     
-    cell.authorAndTime_label.text = author_and_date
+    cell.authorWithTimeLabel.text = authorWithDate
     return cell
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let hit = self.apiObject?.hits?[indexPath.row]
+    if let storyURL = hit?.storyURL{
+      let browser = KAWebBrowser()
+      show(browser, sender: nil)
+      navigationController?.isNavigationBarHidden = false
+      browser.loadURL(storyURL)
+    }else{
+      let alert = UIAlertController(title: "Story doesn't contain a vaild URL.",
+                                    message: "",
+                                    preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+      self.present(alert, animated: true)
+    }
     tableView.deselectRow(at: indexPath, animated: true)
   }
 
@@ -213,13 +221,15 @@ class ViewController: UITableViewController {
     if (editingStyle == UITableViewCellEditingStyle.delete) {
       
       let row = indexPath.row
-      let hit = self.api_object?.hits![row]
+      let hit = self.apiObject?.hits![row]
 
       //Add to deleted items array
-      self.deleted_items?.append((hit)!)
-      self.api_object?.hits!.remove(at: row)
+      self.previouslyDeletedItems?.append((hit)!)
+      self.apiObject?.hits!.remove(at: row)
       self.saveDeletedItems()
       self.tableView.reloadData()
     }
   }
 }
+
+

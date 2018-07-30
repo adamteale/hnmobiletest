@@ -8,11 +8,11 @@
 
 import UIKit
 
-class Post_TableViewCell: UITableViewCell {
+class PostTableViewCell: UITableViewCell {
 
   
-  @IBOutlet var title_label: UILabel!
-  @IBOutlet var authorAndTime_label: UILabel!
+  @IBOutlet var titleLabel: UILabel!
+  @IBOutlet var authorWithTimeLabel: UILabel!
 
   override func awakeFromNib() {
     super.awakeFromNib()
